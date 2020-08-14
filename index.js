@@ -1,4 +1,4 @@
-
+var PORT=process.env.PORT || 3000;
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
@@ -13,7 +13,9 @@ app.use(function(req, res, next) {
    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
    next();
 });
-
+app.get('/',(req,res)=>{
+    res.send("HEllo");
+})
 app.get('/login',(req,res)=>
 {
     client
@@ -58,7 +60,7 @@ app.get('/verify',(req,res)=>
 app.use(bodyParser.json());
 require("./routes/staff.routes")(app);
 
-app.listen(3000,()=>
+app.listen(PORT,()=>
 {
     console.log("server is listening on port no 3000");
 });
