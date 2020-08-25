@@ -51,6 +51,34 @@ exports.findOne = (req, res) => {
 };
 
 
+exports.findUserMobile = (req, res) => {
+  user.findUserByMobile(req.params.mobile, (err, data) => {
+    if (err) {
+      if (err.kind === "false") {
+        res.status(404).send('false');
+      } else {
+        res.status(500).send({
+          message: "Error retrieving user with mobile or email " + req.params.phoneoremail
+        });
+      }
+    } else res.send(data);
+  });
+};
+
+exports.getUsersDetails = (req, res) => {
+  user.getAllDetailsByMobile(req.params.mobile, (err, data) => {
+    if (err) {
+      if (err.kind === "false") {
+        res.send('false');
+      } else {
+        res.status(500).send({
+          message: "Error retrieving user with mobile or email " + req.params.phoneoremail
+        });
+      }
+    } else res.send(data);
+  });
+};
+
 
 
 

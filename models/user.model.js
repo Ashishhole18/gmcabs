@@ -41,4 +41,48 @@ const User = function(user) {
       result({ kind: "false" }, null);
     });
   };
+
+
+
+
+  User.findUserByMobile = (mobile, result) => {
+    sql.query(`SELECT * FROM tbl_users WHERE mobile = '${mobile}'`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.length) {
+        console.log("found customer: ", res[0]);
+        result(null,"true");
+        return;
+      }
+  
+      // not found Customer with the id
+      result({ kind: "false" }, null);
+    });
+  };
+
+
+  User.getAllDetailsByMobile= (mobile, result) => {
+    sql.query(`SELECT * FROM tbl_users WHERE mobile = '${mobile}'`, (err, res) => {
+      if (err) {
+        console.log("error: ", err);
+        result(err, null);
+        return;
+      }
+  
+      if (res.length) {
+        console.log("found customer: ", res[0]);
+        result(null,res[0]);
+        return;
+      }
+  
+      // not found Customer with the id
+      result({ kind: "false" }, null);
+    });
+  };
+
+
   module.exports = User;
